@@ -26,5 +26,8 @@
     <ClInclude Include="Message.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="Chat.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
