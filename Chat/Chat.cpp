@@ -32,10 +32,10 @@ void Chat::login()                     // Описание функции входа в систему
 
 		_currentUser = getUserByLogin(login);
 
-		if (_currentUser == nullptr || (password != _currentUser->getUserPassword()))
+		if (_currentUser == nullptr || (password != _currentUser->getUserPassword()))   // Если указатель на текущего пользователя - nullptr или введён неверный пароль
 		{
-			std::cout << "Login failed!..." << std::endl;
-			std::cout << "0 - exit this menu, or (any kay) for repeat: " << std::endl;
+			std::cout << "Login failed!..." << std::endl;                               // Вывожу ошибку
+			std::cout << "0 - exit this menu, or (any kay) for repeat: " << std::endl;  // Предлагаю выйти из меню или попробовать снова
 			std::cin >> operation;
 
 			if (operation == '0') break;
@@ -70,7 +70,7 @@ void Chat::showChat()  // Описание функции отображения меню чата
 
 	for (auto& mess : _messages)
 	{
-		if (_currentUser->getUserLogin() == mess.getUserFrom() || _currentUser->getUserLogin() == mess.getUserTo() || mess.getUserTo() == "all")
+		if (_currentUser->getUserLogin() == mess.getUserFrom() || _currentUser->getUserLogin() == mess.getUserTo() || mess.getUserTo() == "all")  // По указателю на объект "пользователь" беру его уникальный логин и сортирую сообщения от него, ему и всем
 		{
 			from = (_currentUser->getUserLogin() == mess.getUserFrom()) ? "me " : getUserByLogin(mess.getUserFrom())->getUserLogin();
 
@@ -127,14 +127,14 @@ void Chat::showLoginMenu()                     // Описание функции вывода меню ч
 			std::cout << "Input 1 or 2 " << std::endl;
 			break;
 		}
-	} while (!_currentUser && _isChatOpen);
+	} while (!_currentUser && _isChatOpen);  // Цикл работает пока пользователь корректен и он существует и чат работает
 }
 
 void Chat::showUserMenu()      // Описание функции, отображающей пользовательское меню
 {
 	char operation;
 
-	std::cout << "Hi, " << _currentUser->getUserLogin() << std::endl;
+	std::cout << "Hi, " << _currentUser->getUserLogin() << std::endl;  // Вывод приветствия для вошедшего в систему пользователя по его логину
 
 	while (_currentUser)
 	{
@@ -169,7 +169,7 @@ void Chat::showAllUsers()     // Описание функции отображения всех пользователей
 	{
 		std::cout << user.getUserLogin() << std::endl;
 
-		if (_currentUser->getUserLogin() == user.getUserLogin())
+		if (_currentUser->getUserLogin() == user.getUserLogin())  // Проверка для определения пользователя, под логином которого в данный момент осуществлён вход в систему
 		{
 			std::cout << " (me) " << std::endl;
 		}
@@ -181,15 +181,15 @@ void Chat::addMessage()        // Описание функции добавления сообщений
 {
 	std::string to, text;
 
-	std::cout << "To (name or \"all\")" << std::endl;
+	std::cout << "To (name or \"all\")" << std::endl;  // Прошу ввести получателя
 	std::cin >> to;
-	std::cout << "Text message: ";
+	std::cout << "Text message: ";  // Прошу ввести текст сообщения
 	std::cin.ignore();
-	getline(std::cin, text);
+	getline(std::cin, text);  // Считываю текст сообщения с консоли
 
-	if (!(to == "all" || getUserByLogin(to)))    // Если не удалось найти получателя по логину
+	if (!(to == "all" || getUserByLogin(to)))    // Если не удалось найти получателя по логину или в качестве адресата не указаны "все"
 	{
-		std::cout << "Error send message: can't find " << to << std::endl;  // Вывожу сообщение
+		std::cout << "Error send message: can't find " << to << std::endl;  // Вывожу сообщение об ошибке
 		return;
 	}
 
