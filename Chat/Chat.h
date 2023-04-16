@@ -4,7 +4,7 @@
 #include <memory>
 #include "Message.h"
 
-struct UserLoginException : public std::exception   //
+struct UserLoginExceptions : public std::exception   //
 {                                                   //
 	const char* what() const noexcept override      //
 	{                                               //  Обработка исключений
